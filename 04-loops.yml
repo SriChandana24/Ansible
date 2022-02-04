@@ -1,0 +1,18 @@
+- name: Demo on loops
+  hosts: localhost
+  tasks:
+    - name : Demo on list values, Each value is a string
+      ansible.builtin.debug:
+        msg: Person is {{item}}
+      loop:
+        - John
+        - Jack
+        - Rose
+
+    - name : Demo on list values, Each value is a map
+      ansible.builtin.debug:
+        msg: Person is {{item.name}} and gender is {{item.gender}} 
+      loop:
+        - {name: John, gender: Male}
+        - {name: Jack, gender: Male}
+        - {name: Rose, gender: Female}
