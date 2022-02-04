@@ -1,0 +1,14 @@
+- name: Demo on tags
+  hosts: localhost
+  tasks:
+    - name: CentOS
+      debug:
+        msg: CentOS
+      tags:
+        - centos
+    - name: Ubuntu
+      debug:
+        msg: Ubuntu
+      tags:
+        - ubuntu
+# Note: tags can be applicable for plays also

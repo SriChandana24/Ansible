@@ -6,3 +6,18 @@
 - name: Print URL Variable
   ansible.builtin.debug:
     msg: URL = {{URL}}
+
+- name: Copy a file
+  copy:
+    src: sample.txt
+    dest: /tmp/sample-file.txt
+  vars:
+    COURSE: DEVOPS
+
+
+- name: Copy a template
+  template:
+    src: sample.txt
+    dest: /tmp/sample-temp.txt
+  vars:
+    COURSE: DEVOPS

@@ -1,0 +1,2 @@
+--- FILES ---
+Hello Welcome to {{COURSE}} training
