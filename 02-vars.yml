@@ -67,6 +67,7 @@
   tags:
     - precedence
 ## Print Hostname of remote node
+
 - name: Print Hostname of remote node
   hosts: all
   tasks:
@@ -78,6 +79,7 @@
         msg: "{{ansible_processor}}"
   tags:
     - remote
+
 
 - name: Register a variable
   hosts: all
