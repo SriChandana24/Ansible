@@ -1,8 +1,8 @@
 
--name: Print Hello
-ansible.builtin.debug:
-  msg: Helllo from ROLE...!!
+- name: Print Hello
+  ansible.builtin.debug:
+    msg: Helllo from ROLE...!!
 
--name: Print URL Variable
-ansible.builtin.debug:
-  msg: URL = {{URL}}
+- name: Print URL Variable
+  ansible.builtin.debug:
+    msg: URL = {{URL}}
