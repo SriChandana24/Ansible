@@ -77,7 +77,7 @@
       ansible.builtin.debug:
         msg: "{{ansible_processor}}"
   tags:
-    - remote node
+    - remote
 
 - name: Register a variable
   hosts: all
@@ -97,4 +97,4 @@
       ansible.builtin.debug:
         msg: "{{UPTIME_STDOUT}}"
   tags:
-    - remote node
+    - register_variable
