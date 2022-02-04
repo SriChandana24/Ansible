@@ -5,9 +5,8 @@
   tasks:
     - name: Print URL
       ansible.builtin.debug:
-      msg: URL = {{URL}}
+        msg: URL = {{URL}}
   
-
 # Note: If we declare a varibale in PLAY level then all the tasks can access that variable.
 
 
