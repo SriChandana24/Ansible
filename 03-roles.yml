@@ -1,4 +1,4 @@
--name: Roles demo
+- name: Roles demo
   hosts: all
   roles:
     - demo
