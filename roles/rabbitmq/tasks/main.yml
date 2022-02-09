@@ -1,0 +1,37 @@
+- name: Setup Yum repos
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+
+- name: Install RabbitMQ & Erlang
+  ansible.builtin.yum:
+    name:
+      - rabbitmq-server
+      - https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm
+    state: installed
+
+- name: Start RabbitMQ
+  ansible.builtin.systemd:
+    name: rabbitmq-server
+    state: started
+    enabled: yes
+
+#- name: Setup RoboShop Application User in RabbitMQ
+#  community.rabbitmq.rabbitmq_user:
+#    user: roboshop
+#    password: roboshop123
+#    vhost: /
+#    configure_priv: .*
+#    read_priv: .*
+#    write_priv: .*
+#    state: present
+#    tags:
+#      - administrator
+
+- name: Create User in RabbitMQ
+  shell: rabbitmqctl add_user roboshop roboshop123
+  ignore_errors: yes
+
+- name: Set Tags for User
+  shell: rabbitmqctl set_user_tags roboshop administrator
+
+- name: Set Previsleges for USer
+  shell: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"

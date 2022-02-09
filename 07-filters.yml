@@ -1,0 +1,8 @@
+- name: Demo on tags
+  hosts: localhost
+  vars:
+    sample: abc
+  tasks:
+    - name: Print a var
+      debug:
+        msg: "{{sample | upper}}"

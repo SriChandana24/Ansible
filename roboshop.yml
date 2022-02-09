@@ -1,5 +1,88 @@
--name: Setup frontend component
- hosts: FRONTEND
- become: yes
- roles:
-  - frontend
+- name: Setup Frontend Component
+  hosts: FRONTEND
+  become: yes
+  tags:
+    - frontend 
+  roles:
+    - frontend
+
+- name: Setup MongoDB Component
+  hosts: MONGODB
+  become: yes
+  tags:
+    - mongodb
+  roles:
+    - mongodb
+
+- name: Setup Catalogue Component
+  hosts: CATALOGUE
+  become: yes
+  tags:
+    - catalogue
+  roles:
+    - catalogue
+
+- name: Setup Redis Component
+  hosts: REDIS
+  become: yes
+  tags:
+    - redis
+  roles:
+    - redis
+
+- name: Setup User Component
+  hosts: USER
+  become: yes
+  tags:
+    - user
+  roles:
+    - user
+
+- name: Setup Cart Component
+  hosts: CART
+  become: yes
+  tags:
+    - cart
+  roles:
+    - cart
+
+- name: Setup MySQL Component
+  hosts: MYSQL
+  become: yes
+  tags:
+    - mysql
+  roles:
+    - mysql
+
+- name: Setup Shipping Component
+  hosts: SHIPPING
+  become: yes
+  tags:
+    - shipping
+  roles:
+    - shipping
+
+- name: Setup RabbitMQ Component
+  hosts: RABBITMQ
+  become: yes
+  tags:
+    - rabbitmq
+  roles:
+    - rabbitmq
+
+- name: Setup Payment Component
+  hosts: PAYMENT
+  become: yes
+  tags:
+    - payment
+  roles:
+    - payment
+
+- name: Setup Dispatch Component
+  hosts: DISPATCH
+  become: yes
+  tags:
+    - dispatch
+  roles:
+    - dispatch
+

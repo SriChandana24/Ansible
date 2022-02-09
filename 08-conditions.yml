@@ -1,0 +1,19 @@
+- name: Conditions
+  hosts: localhost
+  vars:
+    a: 11
+    b: abc
+    c: true
+  tasks:
+    - name: Print 1
+      debug:
+        msg: a is equal to 1
+      when: a == 1
+    - name: Print 2
+      debug:
+        msg: b is equal to abc
+      when: b == "abc"
+    - name: Print 3
+      debug:
+        msg: c is true
+      when: c

@@ -1,0 +1,58 @@
+- name: Setup MySQL Repo
+  ansible.builtin.copy:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Install MySQL Server
+  ansible.builtin.yum:
+    name:
+      - mysql-community-server
+      - MySQL-python
+    state: installed
+
+- name: Start MySQL Service
+  ansible.builtin.systemd:
+    name: mysqld
+    state: started
+    enabled: true
+
+- name: Check if new password is working
+  mysql_info:
+    login_user: root
+    login_password: "{{MYSQL_NEW_PASSWORD}}"
+    filter: databases
+  ignore_errors: yes
+  register: check_pass
+
+- name: Password Change Block
+  when: check_pass.failed
+  block:
+    - name: Find the temporary password
+      ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
+      register: mysql_output
+
+    - name: Copy Password Reset SQL
+      ansible.builtin.template:
+        src: pass-reset.sql
+        dest: /tmp/pass.sql
+
+    - name: Change Default password
+      ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{mysql_output.stdout}}" </tmp/pass.sql
+
+- name: Download Database Code
+  import_role:
+    name: common
+    tasks_from: download
+
+#- name: Load Schema
+#  community.mysql.mysql_db:
+#    state: import
+#    name: all
+#    target: /tmp/mysql-main/shipping.sql
+#    login_user: root
+#    login_password: "{{MYSQL_NEW_PASSWORD}}"
+
+- name: Load Schema
+  shell: mysql -uroot -p"{{MYSQL_NEW_PASSWORD}}" </tmp/mysql-main/shipping.sql
+
+
