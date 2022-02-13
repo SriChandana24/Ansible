@@ -9,6 +9,7 @@ INSTANCE_CREATE() {
     echo -e "\e[1;33mInstance Name Argument is needed\e[0m"
     exit
   fi
+  INSTANCE_NAME="$1-dev"
 
   AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" --query 'Images[*].[ImageId]' --output text)
 
