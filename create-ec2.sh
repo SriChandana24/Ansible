@@ -11,7 +11,7 @@ INSTANCE_CREATE() {
   fi
   INSTANCE_NAME="$1-dev"
 
-  AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" --query 'Images[*].[ImageId]' --output text)
+  
 
   if [ -z "${AMI_ID}" ]; then
     echo -e "\e[1;31mUnable to find Image AMI_ID\e[0m"
@@ -57,6 +57,7 @@ INSTANCE_CREATE() {
 
 ### Main Program
 
+AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-7-DevOps-Practice" --query 'Images[*].[ImageId]' --output text)
 
 if [ "$1" == "list" ]; then
   aws ec2 describe-instances  --query "Reservations[*].Instances[*].{PrivateIP:PrivateIpAddress,PublicIP:PublicIpAddress,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}"  --output table
