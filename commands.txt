@@ -1,0 +1,17 @@
+
+# TO install
+yum install python3-pip -y
+pip3 install pip --upgrade
+pip3 install ansible
+
+# To execute
+#Ansible push
+ansible-playbook -i <inventoryfile location> -u <username> -k <filename>.yml
+
+ansible-playbook -i <inventoryfile location> -e ansible_user=<username> -e ansible_password=<password> <filename>.yml
+
+inventoryfile location here is /home/centos/inv
+
+
+#Ansible pull
+ansible-pull -U https://github.com/SriChandana24/Ansible roboshop-pull.yml -e COMPONENT= <componentname>
