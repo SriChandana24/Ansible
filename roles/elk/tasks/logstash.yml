@@ -1,0 +1,13 @@
+- name: Update Logstash config
+  template:
+    src: logstash.conf
+    dest: /etc/logstash/conf.d/logstash.conf
+
+- name: Restart Logstash
+  systemd:
+    name: logstash
+    state: restarted
+    enabled: yes
+
+
+

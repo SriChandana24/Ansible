@@ -1,2 +1,5 @@
 COMPONENT: user
 APPTYPE: app
+LOG_FILES:
+  - /var/log/user.log
+LOGTYPE: json

@@ -1,0 +1,32 @@
+- name: Copy Filebeat Yum repo file
+  copy:
+    src: elastic.repo
+    dest: /etc/yum.repos.d/elastic.repo
+
+- name: Install filebeat
+  yum:
+    name: filebeat
+    state: installed
+
+- name: Configure Filebeat
+  template:
+    src: filebeat.yml
+    dest: /etc/filebeat/filebeat.yml
+
+- name: Start filebeat
+  systemd:
+    name: filebeat
+    state: restarted
+    enabled: yes
+
+- name: Update RsysLog Config
+  template:
+    src: roboshop.conf
+    dest: /etc/rsyslog.d/roboshop.conf
+  when: APPTYPE == "app"
+
+- name: Restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted
+  when: APPTYPE == "app"
